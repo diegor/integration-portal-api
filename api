@@ -1,0 +1,1355 @@
+# This Design First/IDL First Connect API module was generated using Bazel templates.
+# Refer to QuickStart.md for more information on how to get started.
+
+openapi: "3.0.1"
+info:
+  version: 'v65.0'
+  title: IntegrationExperiencePortals Connect API
+  x-oas-name: "integration-portal-api"
+servers:
+  - url: /services/data/v65.0
+# Enable OneStore extensions.
+# Required for LDS adapter generation.
+x-onestore:
+  version: 1.0.0
+x-connect:
+  team: MS SF Experience Portal
+  features:
+    IIntegrationExperiencePortalsFeature:
+      families:
+        IntegrationExperiencePortalsApiFamily:
+          min-version: 256
+          # Enable Connect wrapper generation for Aura/Connect-in-Java (CiJ) and Connect-in-Apex (CiA).
+          # Required for LDS adapter generation.
+          #   - required for LDS adapter generation
+          wrapper:
+            class-name: IntegrationExperiencePortalsApi
+
+          # Enable Aura controller generation.
+          # Required for LDS adapter generation.
+          generate-aura-controller: true
+
+          # Disable Apex wrapper generation at the family level.
+          connect-hidden:
+            - Apex
+paths:
+  /integration/portals:
+    description: Manage IntegrationPortal records.
+    x-connect:
+      resource-name: IIntegrationPortalCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists IntegrationPortal records.
+      operationId: listIntegrationPortals
+      x-onestore:
+        config:
+          aura:
+            method: listIntegrationPortals
+          exposeRefresh: true
+      parameters:
+        - name: count
+          in: query
+          description: Optional maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A collection of IntegrationPortal records
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationPortalCollectionRepresentation"
+    post:
+      description: Creates an IntegrationPortal record.
+      operationId: createIntegrationPortal
+      x-onestore:
+        config:
+          aura:
+            method: createIntegrationPortal
+            body-param: integrationPortalInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: createIntegrationPortal
+            generate-aura-method: true
+            parameters:
+              - integrationPortalInputRepresentation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationPortalInputRepresentation'
+      responses:
+        '200':
+          description: The created IntegrationPortal record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationPortalOutputRepresentation'
+  /integration/portals/{portalId}:
+    description: Manage a specific IntegrationPortal record.
+    x-connect:
+      resource-name: IIntegrationPortalResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Gets a specific IntegrationPortal record.
+      operationId: getIntegrationPortal
+      x-onestore:
+        config:
+          aura:
+            method: getIntegrationPortal
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The IntegrationPortal record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationPortalOutputRepresentation'
+    put:
+      description: Updates an IntegrationPortal record.
+      operationId: updateIntegrationPortal
+      x-onestore:
+        config:
+          aura:
+            method: updateIntegrationPortal
+            body-param: integrationPortalInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: updateIntegrationPortal
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - integrationPortalInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationPortalInputRepresentation'
+      responses:
+        '200':
+          description: The updated IntegrationPortal record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationPortalOutputRepresentation'
+    delete:
+      description: Deletes an IntegrationPortal record.
+      operationId: deleteIntegrationPortal
+      x-onestore:
+        config:
+          aura:
+            method: deleteIntegrationPortal
+      x-connect:
+        signatures:
+          - methodName: deleteIntegrationPortal
+            generate-aura-method: true
+            parameters:
+              - portalId
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Portal deleted successfully
+
+  /integration/portals/{portalId}/assets:
+    description: Manage IntegrationAsset records within a portal context.
+    x-connect:
+      resource-name: IIntegrationAssetCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists IntegrationAsset records for a specific portal.
+      operationId: listPortalIntegrationAssets
+      x-onestore:
+        config:
+          aura:
+            method: listPortalIntegrationAssets
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Optional maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A collection of IntegrationAsset records
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationAssetCollectionRepresentation"
+    post:
+      description: Creates an IntegrationAsset record within a portal.
+      operationId: createPortalIntegrationAsset
+      x-onestore:
+        config:
+          aura:
+            method: createPortalIntegrationAsset
+            body-param: integrationAssetInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: createPortalIntegrationAsset
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - integrationAssetInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationAssetInputRepresentation'
+      responses:
+        '200':
+          description: The created IntegrationAsset record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationAssetOutputRepresentation'
+
+  /integration/portals/{portalId}/assets/{assetId}:
+    description: Manage a specific IntegrationAsset record.
+    x-connect:
+      resource-name: IIntegrationAssetResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Gets a specific IntegrationAsset record.
+      operationId: getPortalIntegrationAsset
+      x-onestore:
+        config:
+          aura:
+            method: getPortalIntegrationAsset
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The IntegrationAsset record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationAssetOutputRepresentation'
+    put:
+      description: Updates an IntegrationAsset record.
+      operationId: updatePortalIntegrationAsset
+      x-onestore:
+        config:
+          aura:
+            method: updatePortalIntegrationAsset
+            body-param: integrationAssetInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: updatePortalIntegrationAsset
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - assetId
+              - integrationAssetInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationAssetInputRepresentation'
+      responses:
+        '200':
+          description: The updated IntegrationAsset record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationAssetOutputRepresentation'
+    delete:
+      description: Deletes an IntegrationAsset record.
+      operationId: deletePortalIntegrationAsset
+      x-onestore:
+        config:
+          aura:
+            method: deletePortalIntegrationAsset
+      x-connect:
+        signatures:
+          - methodName: deletePortalIntegrationAsset
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - assetId
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Asset deleted successfully
+
+  /integration/portals/{portalId}/assets/{assetId}/versions:
+    description: Manage IntegPrtlAssetVer records.
+    x-connect:
+      resource-name: IIntegPrtlAssetVerCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists versions for an integration asset.
+      operationId: listAssetVersions
+      x-onestore:
+        config:
+          aura:
+            method: listAssetVersions
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Optional maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A collection of asset versions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegPrtlAssetVerCollectionRepresentation"
+    post:
+      description: Creates a new version for an integration asset.
+      operationId: createAssetVersion
+      x-onestore:
+        config:
+          aura:
+            method: createAssetVersion
+            body-param: integPrtlAssetVerInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: createAssetVersion
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - assetId
+              - integPrtlAssetVerInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegPrtlAssetVerInputRepresentation'
+      responses:
+        '200':
+          description: The created asset version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegPrtlAssetVerOutputRepresentation'
+
+  /integration/portals/{portalId}/assets/{assetId}/versions/{versionId}:
+    description: Manage a specific IntegPrtlAssetVer record.
+    x-connect:
+      resource-name: IIntegPrtlAssetVerResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Gets a specific asset version.
+      operationId: getAssetVersion
+      x-onestore:
+        config:
+          aura:
+            method: getAssetVersion
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+        - name: versionId
+          in: path
+          description: The ID of the asset version.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The asset version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegPrtlAssetVerOutputRepresentation'
+    put:
+      description: Updates an asset version.
+      operationId: updateAssetVersion
+      x-onestore:
+        config:
+          aura:
+            method: updateAssetVersion
+            body-param: integPrtlAssetVerInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: updateAssetVersion
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - assetId
+              - versionId
+              - integPrtlAssetVerInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+        - name: versionId
+          in: path
+          description: The ID of the asset version.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegPrtlAssetVerInputRepresentation'
+      responses:
+        '200':
+          description: The updated asset version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegPrtlAssetVerOutputRepresentation'
+    delete:
+      description: Deletes an asset version.
+      operationId: deleteAssetVersion
+      x-onestore:
+        config:
+          aura:
+            method: deleteAssetVersion
+      x-connect:
+        signatures:
+          - methodName: deleteAssetVersion
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - assetId
+              - versionId
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the IntegrationAsset.
+          required: true
+          schema:
+            type: string
+        - name: versionId
+          in: path
+          description: The ID of the asset version.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Version deleted successfully
+
+  /integration/portals/{portalId}/available-assets:
+    description: Manage available assets for publishing in a portal.
+    x-connect:
+      resource-name: IAvailableAssetCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists available assets that can be published in the specified portal.
+      operationId: listAvailableAssets
+      x-onestore:
+        config:
+          aura:
+            method: listAvailableAssets
+          exposeRefresh: true
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal to filter against.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A collection of available cataloged APIs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AvailableAssetCollectionRepresentation"
+
+  /integration/portals/{portalId}/assets/publish:
+    description: Publishes multiple available assets from external sources into the portal.
+    x-connect:
+      resource-name: IAssetPublicationResource
+      family: IntegrationExperiencePortalsApiFamily
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    post:
+      description: Publishes multiple available assets from external sources into the portal.
+      operationId: publishAvailableAssets
+      x-onestore:
+        config:
+          aura:
+            method: publishAvailableAssets
+            body-param: publishAssetsInputRepresentation
+      x-connect:
+        signatures:
+          - methodName: publishAvailableAssets
+            generate-aura-method: true
+            parameters:
+              - portalId
+              - publishAssetsInputRepresentation
+      parameters:
+        - name: portalId
+          in: path
+          description: The ID of the IntegrationPortal.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishAssetsInputRepresentation'
+      responses:
+        '200':
+          description: Successfully published assets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishAssetsRepresentation'
+
+  /integration/mcp/portals:
+    description: Integration Portals MCP
+    x-connect:
+      resource-name: IIntegrationMCPPortalCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+      allows-portal-users: true
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists Integration Portals.
+      operationId: listIntegrationPortalsMCP
+      x-onestore:
+        config:
+          aura:
+            method: listIntegrationPortalsMCP
+          exposeRefresh: true
+      parameters:
+        - name: count
+          in: query
+          description: Optional maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A collection of Integration Portals
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationPortalMCPCollectionRepresentation"
+
+
+  /integration/mcp/portals/{portal}/assets:
+    description: Get Integration Assets for a portal.
+    x-connect:
+      resource-name: IIntegrationAssetMCPCollectionResource
+      family: IntegrationExperiencePortalsApiFamily
+      allows-portal-users: true
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Lists Integration Assets records for a specific portal.
+      operationId: listPortalIntegrationAssetsMCP
+      x-onestore:
+        config:
+          aura:
+            method: listPortalIntegrationAssetsMCP
+          exposeRefresh: true
+      parameters:
+        - name: portal
+          in: path
+          description: The Name of the Integration Portal.
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Optional maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A collection of Integration Assets records
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationAssetMCPCollectionRepresentation"
+
+  /integration/mcp/portals/{portal}/assets/{assetId}/versions/{versionId}:
+    description: Get asset versions for MCP server.
+    x-connect:
+      resource-name: IIntegrationPortalAssetVerMCPResource
+      family: IntegrationExperiencePortalsApiFamily
+      allows-portal-users: true
+
+    x-onestore:
+      endpoint-type: aura
+      config:
+        aura:
+          controller: IntegrationExperiencePortalsApiController
+    get:
+      description: Gets a specific asset version.
+      operationId: getAssetVersionMCP
+      x-onestore:
+        config:
+          aura:
+            method: getAssetVersionMCP
+          exposeRefresh: true
+      parameters:
+        - name: portal
+          in: path
+          description: The name of the Integration Portal.
+          required: true
+          schema:
+            type: string
+        - name: assetId
+          in: path
+          description: The ID of the Integration Asset.
+          required: true
+          schema:
+            type: string
+        - name: versionId
+          in: path
+          description: The asset version.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The asset version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationPortalAssetVerMCPOutputRepresentation'
+
+components:
+  schemas:
+    # Portal Representations
+    IntegrationPortalInputRepresentation:
+      description: Input to create or update an IntegrationPortal record
+      x-connect:
+        representation-type: input
+        min-version: 258
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: The name of the integration portal
+          type: string
+        description:
+          description: Description of the integration portal
+          type: string
+        siteUrlPrefix:
+          description: URL path prefix for Experience Cloud Site (auto-generated if not provided)
+          type: string
+          pattern: "^[a-zA-Z0-9-_]+$"
+          maxLength: 40
+
+    IntegrationPortalOutputRepresentation:
+      description: Represents an IntegrationPortal record
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: The record Id
+          type: string
+        name:
+          description: The name of the integration portal
+          type: string
+        description:
+          description: Description of the integration portal
+          type: string
+        managedContentSpaceId:
+          description: The ID of the associated Managed Content Space
+          type: string
+        networkId:
+          description: The ID of the associated Experience Cloud Network
+          type: string
+        siteId:
+          description: The ID of the associated Experience Cloud Site
+          type: string
+        siteUrlPrefix:
+          description: The URL path prefix of the Experience Cloud Site
+          type: string
+        siteUrl:
+          description: The full URL of the Experience Cloud Site
+          type: string
+
+
+    IntegrationPortalMCPOutputRepresentation:
+      description: Represents an IntegrationPortal record
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: The name of the integration portal
+          type: string
+        description:
+          description: Description of the integration portal
+          type: string
+        siteUrl:
+          description: The full URL of the Experience Cloud Site
+          type: string
+
+    IntegrationPortalCollectionRepresentation:
+      description: Represents a collection of IntegrationPortal records
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        items:
+          description: List of IntegrationPortal records
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegrationPortalOutputRepresentation"
+        count:
+          description: Total number of records returned
+          type: integer
+
+    IntegrationPortalMCPCollectionRepresentation:
+        description: Represents a collection of IntegrationPortal MCP records
+        x-connect:
+          representation-type: output
+          min-version: 258
+        type: object
+        properties:
+          items:
+            description: List of IntegrationPortal records
+            type: array
+            items:
+              $ref: "#/components/schemas/IntegrationPortalMCPOutputRepresentation"
+          count:
+            description: Total number of records returned
+            type: integer
+
+    # Asset Representations
+    IntegrationAssetSourceEnum:
+      description: The source system where this asset originates.
+      type: string
+      enum:
+        - "ApiCatalog"
+        - "Manual"
+
+    IntegrationAssetTypeEnum:
+      description: The type of integration asset.
+      type: string
+      enum:
+        - "RestApi"
+        - "McpServer"
+
+    IntegrationAssetOutputRepresentation:
+      description: Represents an IntegrationAsset record with its versions
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - source
+      properties:
+        id:
+          description: The record Id
+          type: string
+        name:
+          description: The name of the integration asset
+          type: string
+        description:
+          description: Detailed description of the integration asset
+          type: string
+        type:
+          description: The type of integration asset
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetTypeEnum"
+        source:
+          description: The source system where this asset originates
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetSourceEnum"
+        sourceReference:
+          description: External reference identifier for the source system
+          type: string
+        portalId:
+          description: The ID of the parent IntegrationPortal
+          type: string
+        managedContentId:
+          description: The ID of the associated Managed Content
+          type: string
+        managedContentText:
+          description: Temporary text field for content (will create/update ManagedContent)
+          type: string
+        versions:
+          description: List of versions for this integration asset
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegrationAssetVersionRepresentation"
+    IntegrationAssetVersionRepresentation:
+      description: Represents a version of an IntegrationAsset
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - version
+        - integrationAssetId
+      properties:
+        id:
+          description: The version record Id
+          type: string
+        version:
+          description: The version identifier (e.g., v1.0, 2.1.3)
+          type: string
+        integrationAssetId:
+          description: The Id of the parent IntegrationAsset
+          type: string
+    IntegrationAssetInputRepresentation:
+      description: Input to create or update an IntegrationAsset record
+      x-connect:
+        representation-type: input
+        min-version: 258
+      type: object
+      required:
+        - name
+        - type
+        - source
+      properties:
+        name:
+          description: The name of the integration asset
+          type: string
+        description:
+          description: Detailed description of the integration asset
+          type: string
+        type:
+          description: The type of integration asset
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetTypeEnum"
+        source:
+          description: The source system where this asset originates
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetSourceEnum"
+        sourceReference:
+          description: External reference identifier for the source system
+          type: string
+        managedContentText:
+          description: Content text (will create/update ManagedContent record)
+          type: string
+        documentation:
+          description: Documentation for the integration asset
+          type: string
+        versions:
+          description: List of versions for this integration asset
+          type: array
+          items:
+            type: string
+    IntegrationAssetCollectionRepresentation:
+      description: Represents a collection of IntegrationAsset records
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        items:
+          description: List of IntegrationAsset records
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegrationAssetOutputRepresentation"
+        count:
+          description: Total number of records returned
+          type: integer
+
+
+    IntegrationAssetMCPOutputRepresentation:
+            description: Represents a version of an IntegrationAsset
+            x-connect:
+              representation-type: output
+              min-version: 258
+            type: object
+            required:
+              - name
+              - description
+              - version
+              - documentation
+            properties:
+              name:
+                description: The asset name
+                type: string
+              description:
+                description: The asset description
+                type: string
+              version:
+                description: The version identifier (e.g., v1.0, 2.1.3)
+                type: string
+              documentation:
+                description: Documentation for the asset version
+                type: string
+
+
+    IntegrationAssetMCPCollectionRepresentation:
+      description: Represents a collection of Integration Assets records
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        items:
+          description: List of IntegrationAsset records
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegrationAssetMCPOutputRepresentation"
+        count:
+          description: Total number of records returned
+          type: integer
+
+    # Asset Version Representations
+    IntegPrtlAssetVerInputRepresentation:
+      description: Input to create or update an asset version
+      x-connect:
+        representation-type: input
+        min-version: 258
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          description: The version identifier (e.g., v1.0, 2.1.3)
+          type: string
+    IntegPrtlAssetVerOutputRepresentation:
+      description: Represents an asset version record
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - id
+        - version
+        - integrationPortalId
+        - integrationAssetId
+      properties:
+        id:
+          description: The record Id
+          type: string
+        name:
+          description: Auto-generated name of the version
+          type: string
+        version:
+          description: The version identifier
+          type: string
+        integrationPortalId:
+          description: The ID of the IntegrationPortal
+          type: string
+        integrationAssetId:
+          description: The ID of the IntegrationAsset
+          type: string
+    IntegrationPortalAssetVerMCPOutputRepresentation:
+            description: Represents an asset version record
+            x-connect:
+              representation-type: output
+              min-version: 258
+            type: object
+            required:
+              - name
+              - version
+              - integrationPortal
+              - documentation
+            properties:
+              name:
+                description: Asset name
+                type: string
+              version:
+                description: The version identifier
+                type: string
+              integrationPortal:
+                description: The name of the Integration Portal
+                type: string
+              documentation:
+                description: Documentation for the asset version
+                type: string
+
+    IntegPrtlAssetVerCollectionRepresentation:
+      description: Represents a collection of asset version records
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        items:
+          description: List of asset version records
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegPrtlAssetVerOutputRepresentation"
+        count:
+          description: Total number of records returned
+          type: integer
+
+    # Available Asset Representations
+    CatalogedApiTypeEnum:
+      description: The type of cataloged API.
+      type: string
+      enum:
+        - "Rest"
+        - "GraphQl"
+        - "Grpc"
+
+    AvailableAssetCollectionRepresentation:
+      description: Represents a collection of available cataloged APIs
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        items:
+          description: List of available cataloged APIs
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailableAssetOutputRepresentation"
+        count:
+          description: Total number of available assets returned
+          type: integer
+
+    # Asset Publication Schemas
+    PublishAssetsInputRepresentation:
+      description: Request to publish multiple available assets
+      x-connect:
+        representation-type: input
+        min-version: 258
+      type: object
+      required:
+        - assets
+      properties:
+        assets:
+          description: Array of assets to publish
+          type: array
+          items:
+            $ref: "#/components/schemas/AssetPublishItemInputRepresentation"
+
+    AssetPublishItemInputRepresentation:
+      description: Individual asset to publish
+      x-connect:
+        representation-type: input
+        min-version: 258
+      type: object
+      required:
+        - id
+        - source
+      properties:
+        id:
+          description: The external asset ID
+          type: string
+        source:
+          description: The source system
+          type: string
+          enum: ["ApiCatalog"]
+
+    PublishAssetsRepresentation:
+      description: Result of bulk asset publication
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        published:
+          description: Successfully published assets
+          type: array
+          items:
+            $ref: "#/components/schemas/PublishedAssetResultRepresentation"
+        failed:
+          description: Failed asset publications
+          type: array
+          items:
+            $ref: "#/components/schemas/FailedAssetResultRepresentation"
+        totalCount:
+          type: integer
+          x-connect:
+            description: Total number of assets processed
+        successCount:
+          type: integer
+          x-connect:
+            description: Number of successfully published assets
+        failureCount:
+          type: integer
+          x-connect:
+            description: Number of assets that failed to publish
+
+    PublishedAssetResultRepresentation:
+      description: Successfully published asset result
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        externalId:
+          type: string
+          x-connect:
+            description: The external ID of the published asset
+        integrationAssetId:
+          type: string
+          x-connect:
+            description: The ID of the created IntegrationAsset
+        name:
+          type: string
+          x-connect:
+            description: The name of the published asset
+
+    FailedAssetResultRepresentation:
+      description: Failed asset publication result
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      properties:
+        externalId:
+          type: string
+          x-connect:
+            description: The external ID of the failed asset
+        error:
+          type: string
+          x-connect:
+            description: The error message describing the failure
+        reason:
+          type: string
+          x-connect:
+            description: The reason for the failure
+
+    # Enhanced Available Asset Schema
+    AvailableAssetOutputRepresentation:
+      description: Represents an available asset from any source
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - id
+        - name
+        - source
+      properties:
+        id:
+          description: The external asset ID
+          type: string
+        name:
+          description: The name of the available asset
+          type: string
+        assetType:
+          description: The type of the asset
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetTypeEnum"
+        label:
+          description: Human-readable label for the asset
+          type: string
+        description:
+          description: Description of the available asset
+          type: string
+        source:
+          description: Source system where this asset originates
+          oneOf:
+            - $ref: "#/components/schemas/IntegrationAssetSourceEnum"
+        extSourceIdentifier:
+          description: External source identifier for the asset
+          type: string
+        apiVersions:
+          description: List of available versions for this asset
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailableAssetVersionRepresentation"
+
+    AvailableAssetVersionRepresentation:
+      description: Represents a version of an available asset
+      x-connect:
+        representation-type: output
+        min-version: 258
+      type: object
+      required:
+        - version
+      properties:
+        id:
+          description: The version Id
+          type: string
+        version:
+          description: The version identifier
+          type: string
+        name:
+          description: The name of the version
+          type: string
+        description:
+          description: Description of the version
+          type: string
