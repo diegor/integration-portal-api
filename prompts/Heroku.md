@@ -90,7 +90,7 @@ Each asset contains:
    - API name
    - Full description
    - Version badge (remove v prefix if already part of asset version)
-   - Use the API endpoint to get an asset detail 
+     
 
 2. **Interactive Documentation**
    - Full-page Swagger UI rendering
@@ -120,6 +120,8 @@ Each asset contains:
 - Parse and decode HTML entities in documentation
 - Initialize Swagger UI with decoded OpenAPI spec
 - Display error messages for missing or invalid specs
+- To fetch the complete assets list and find the specific asset by name
+- The documentation field contains HTML entities (&quot;, &amp;, etc.) that need decoding before JSON parsing
 
 ## Styling Requirements
 
@@ -157,10 +159,10 @@ Absolute Paths: Use absolute paths (/styles.css, /detail.js) for assets in detai
 
 Version Display: Don't add "v" prefix if version already contains it.
 
-Add CORS support to the Express server
+Add CORS support for embedded contexts
 
 Implementation Steps
-Create Express server with OAuth authentication and token caching
+Create Express server with OAuth authentication ,token caching and CORS support for embedded contexts
 Implement API proxy endpoints
 Build home page with responsive carousel
 Create detail page with Swagger UI integration
