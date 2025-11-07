@@ -116,8 +116,6 @@ Each asset contains:
 - URL-encode identifiers for detail links
 
 #### Detail Page (detail.html, detail.js)
-- Extract asset ID from URL path
-- Fetch asset data from `/api/assets/:id`
 - Parse and decode HTML entities in documentation
 - Initialize Swagger UI with decoded OpenAPI spec
 - Display error messages for missing or invalid specs
@@ -152,7 +150,7 @@ Each asset contains:
 Special Considerations
 HTML Entity Decoding: Documentation field contains HTML-encoded JSON. Decode entities like &quot;, &amp;, &lt;, &gt;, &#39;, &#92; before parsing.
 
-Asset Identification: Assets may not have an id field. Use name as fallback identifier and search by multiple fields (id, externalId, name).
+Asset Identification: Use name as identifier.
 
 Absolute Paths: Use absolute paths (/styles.css, /detail.js) for assets in detail.html to avoid 404 errors on nested routes.
 
