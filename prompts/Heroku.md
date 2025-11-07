@@ -101,8 +101,7 @@ Each asset contains:
 #### Key Features
 - Token caching with automatic refresh
 - Error handling for API failures
-- Support for multiple response structures (items, assets, records arrays)
-- Search by multiple identifier types (id, externalId, name)
+
 
 ### Frontend Implementation
 
