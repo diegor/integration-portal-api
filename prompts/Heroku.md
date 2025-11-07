@@ -35,19 +35,15 @@ Each asset contains:
 ## Application Features
 
 ### Home Page
-1. **Header Section**
-   - Banking-themed header with icon
-   - Application title: "Banking API Developer Portal"
-   - Subtitle: "Explore and integrate our banking APIs"
 
-2. **API Cards Carousel**
+1. **API Cards Carousel**
    - Display 3 cards per view on desktop
    - Responsive design (2 cards on tablet, 1 on mobile)
    - Auto-rotating carousel (5-second intervals)
    - Manual navigation with previous/next buttons
    - Pagination dots with click navigation
    
-3. **API Card Design**
+2. **API Card Design**
    - Icon/emoji representation (based on API name)
    - API name as title
    - Description (truncated to 3 lines)
@@ -69,14 +65,7 @@ Each asset contains:
    - Request/response examples
    - Schema definitions
 
-### Backend Implementation
-
-#### Server Endpoints
-- `GET /` - Serve home page
-- `GET /api/assets` - Fetch all assets from Salesforce
-- `GET /api/assets/:id` - Fetch specific asset by id, externalId, or name
-- `GET /detail/:id` - Serve detail page
-
+#
 #### Key Features
 - Token caching with automatic refresh
 - Error handling for API failures
@@ -127,25 +116,6 @@ Each asset contains:
   - `CLIENT_SECRET`: OAuth client secret
   - `PORT`: Auto-assigned by Heroku
 
-### Dependencies
-```json
-{
-  "express": "^4.18.2",
-  "axios": "^1.6.2",
-  "dotenv": "^16.3.1"
-}
-File Structure
-/
-├── server.js              # Express server with OAuth and API endpoints
-├── package.json           # Dependencies and npm scripts
-├── Procfile              # Heroku process definition
-├── .env.example          # Environment variable template
-├── public/
-│   ├── index.html        # Home page with carousel
-│   ├── detail.html       # Detail page for API documentation
-│   ├── app.js           # Home page JavaScript
-│   ├── detail.js        # Detail page JavaScript
-│   └── styles.css       # All application styles
 Special Considerations
 HTML Entity Decoding: Documentation field contains HTML-encoded JSON. Decode entities like &quot;, &amp;, &lt;, &gt;, &#39;, &#92; before parsing.
 
