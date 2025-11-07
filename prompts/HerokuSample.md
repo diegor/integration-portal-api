@@ -16,8 +16,8 @@ Create a web application that serves as a Developer Portal for banking APIs. The
 
 ### Salesforce Configuration
 - **Base URL**: Configurable via SF_URL environment variable
-- **Endpoint to get assets**: `/services/data/v65.0/integration/portals/{PORTAL_ID}/assets`
-- **Endpoint to get asset detail**: `/services/data/v65.0/integration/portals/{PORTAL_ID}/assets/{ASSET_ID}`
+- **Endpoint to get assets**: `{SF_URL}/services/data/v65.0/integration/portals/{PORTAL_ID}/assets`
+- **Endpoint to get asset detail**: `{SF_URL}/services/data/v65.0/integration/portals/{PORTAL_ID}/assets/{ASSET_ID}`
 - **Portal ID**: Configurable (e.g., "1m7xx0000000001AAA")
 - **Response Format for get assets**:
   ```
@@ -78,7 +78,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
     }
   ]
 }
-```
+
 
 - **Response Sample for asset detail**
 
@@ -96,7 +96,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
     "type": "RestApi",
     "version": "1.0"
 }
-```
+
   
 
 ### Asset Structure
