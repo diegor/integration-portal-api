@@ -159,7 +159,7 @@ Each asset contains:
 - URL-encode identifiers for detail links
 
 #### Detail Page (detail.html, detail.js)
-- Parse and decode HTML entities in documentation
+- Parse and decode HTML entities in specification
 - Initialize Swagger UI with decoded OpenAPI spec
 - Display error messages for missing or invalid specs
 
