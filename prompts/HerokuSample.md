@@ -19,7 +19,66 @@ Create a web application that serves as a Developer Portal for banking APIs. The
 - **Endpoint to get assets**: `/services/data/v65.0/integration/portals/{PORTAL_ID}/assets`
 - **Endpoint to get asset detail**: `/services/data/v65.0/integration/portals/{PORTAL_ID}/assets/{ASSET_ID}`
 - **Portal ID**: Configurable (e.g., "1m7xx0000000001AAA")
-- **Response Format for assets**: JSON with structure `{ count: number, items: [] }`
+- **Response Format for get assets**:
+  ```
+  {
+  "count": 4,
+  "items": [
+    {
+      "description": "Locate ATMs",
+      "id": "1m8xx0000000001AAA",
+      "managedContentId": "20Yxx0000011QtSEAU",
+      "managedContentText": null,
+      "name": "ATM",
+      "portalId": "1m7xx0000000001AAA",
+      "source": "ApiCatalog",
+      "sourceReference": "1LKxx0000004CAe",
+      "specification": null,
+      "type": "RestApi",
+      "version": "1.0"
+    },
+    {
+      "description": "Manage personal accounts",
+      "id": "1m8xx0000000002AAA",
+      "managedContentId": "20Yxx0000011QtTEAU",
+      "managedContentText": null,
+      "name": "Accounts",
+      "portalId": "1m7xx0000000001AAA",
+      "source": "ApiCatalog",
+      "sourceReference": "1LKxx0000004CAg",
+      "specification": null,
+      "type": "RestApi",
+      "version": "1.0"
+    },
+    {
+      "description": "Manage Investment Accounts",
+      "id": "1m8xx0000000003AAA",
+      "managedContentId": "20Yxx0000011QtUEAU",
+      "managedContentText": null,
+      "name": "Investments",
+      "portalId": "1m7xx0000000001AAA",
+      "source": "ApiCatalog",
+      "sourceReference": "1LKxx0000004CCG",
+      "specification": null,
+      "type": "RestApi",
+      "version": "1.0"
+    },
+    {
+      "description": "Manage Loans for Customers",
+      "id": "1m8xx0000000004AAA",
+      "managedContentId": "20Yxx0000011QtVEAU",
+      "managedContentText": null,
+      "name": "Loans",
+      "portalId": "1m7xx0000000001AAA",
+      "source": "ApiCatalog",
+      "sourceReference": "1LKxx0000004CCH",
+      "specification": null,
+      "type": "RestApi",
+      "version": "1.0"
+    }
+  ]
+}
+```
 - **Response Sample for asset detail**:
  ```
   {
