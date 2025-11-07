@@ -23,7 +23,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
   ```
   {
   "count": 4,
-  "items": [
+  "assets": [
     {
       "description": "Locate ATMs",
       "id": "1m8xx0000000001AAA",
@@ -79,8 +79,10 @@ Create a web application that serves as a Developer Portal for banking APIs. The
   ]
 }
 ```
-- **Response Sample for asset detail**:
- ```
+
+- **Response Sample for asset detail**
+
+```
   {
     "description": "Locate ATMs",
     "id": "1m8xx0000000001AAA",
