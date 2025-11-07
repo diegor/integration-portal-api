@@ -164,6 +164,7 @@ Response Flexibility: Handle various response structures (direct arrays, nested 
 
 Implementation Steps
 Create Express server with OAuth authentication and token caching
+Add CORS support to the Express server
 Implement API proxy endpoints
 Build home page with responsive carousel
 Create detail page with Swagger UI integration
