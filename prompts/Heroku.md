@@ -26,7 +26,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
 - **Response Format**: JSON with structure `{ count: number, items: [] }`
   Sample response:
 
-  This is the response:  {
+  {
     "count": 4,
     "items": [
         {
