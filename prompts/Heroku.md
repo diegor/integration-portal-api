@@ -24,10 +24,8 @@ Create a web application that serves as a Developer Portal for banking APIs. The
 - **API Endpoint**: `/services/data/v65.0/integration/mcp/portals/{PORTAL_ID}/assets`
 - **Portal ID**: Configurable (e.g., "HomeBanking")
 - **Response Format**: JSON with structure `{ count: number, items: [] }`
-
-  <details>
-  <summary>Sample response</summary>
-
+- **Response Sample**:
+ ```
   {
     "count": 4,
     "items": [
@@ -58,7 +56,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
     ]
 
 }
-</details>
+```
   
 
 ### Asset Structure
@@ -160,11 +158,10 @@ Absolute Paths: Use absolute paths (/styles.css, /detail.js) for assets in detai
 
 Version Display: Don't add "v" prefix if version already contains it.
 
-Response Flexibility: Handle various response structures (direct arrays, nested items/assets/records/data arrays).
+Add CORS support to the Express server
 
 Implementation Steps
 Create Express server with OAuth authentication and token caching
-Add CORS support to the Express server
 Implement API proxy endpoints
 Build home page with responsive carousel
 Create detail page with Swagger UI integration
