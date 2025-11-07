@@ -3,12 +3,7 @@
 ## Overview
 Create a web application that serves as a Developer Portal for banking APIs. The portal connects to a Salesforce Integration Portal API to fetch and display API assets with interactive documentation.
 
-## Technical Stack
-- **Backend**: Node.js with Express.js
-- **Frontend**: Vanilla JavaScript (no framework)
-- **Styling**: Custom CSS with modern design
-- **API Documentation**: Swagger UI for OpenAPI specifications
-- **Deployment**: Heroku
+
 
 ## API Integration
 
@@ -81,7 +76,7 @@ Each asset contains:
    - Icon/emoji representation (based on API name)
    - API name as title
    - Description (truncated to 3 lines)
-   - Version badge 
+   - Version badge (remove v prefix if already part of asset version
    - "View Details" button
 
 ### Detail Page
@@ -89,16 +84,18 @@ Each asset contains:
    - Large icon display
    - API name
    - Full description
-   - Version badge (remove v prefix if already part of asset version)
+
      
 
 2. **Interactive Documentation**
    - Full-page Swagger UI rendering
-   - Parse and decode HTML entities from documentation field
+   - Parse and decode HTML entities from documentation field 
    - Display complete OpenAPI specification
    - Interactive "Try it out" functionality
    - Request/response examples
    - Schema definitions
+   - To fetch the complete assets list and find the specific asset by name
+   - The documentation field contains HTML entities (&quot;, &amp;, etc.) that need decoding before JSON parsing
 
 #
 #### Key Features
@@ -120,8 +117,7 @@ Each asset contains:
 - Parse and decode HTML entities in documentation
 - Initialize Swagger UI with decoded OpenAPI spec
 - Display error messages for missing or invalid specs
-- To fetch the complete assets list and find the specific asset by name
-- The documentation field contains HTML entities (&quot;, &amp;, etc.) that need decoding before JSON parsing
+
 
 ## Styling Requirements
 
@@ -149,36 +145,4 @@ Each asset contains:
   - `CLIENT_ID`: OAuth client ID
   - `CLIENT_SECRET`: OAuth client secret
   - `PORT`: Auto-assigned by Heroku
-
-Special Considerations
-HTML Entity Decoding: Documentation field contains HTML-encoded JSON. Decode entities like &quot;, &amp;, &lt;, &gt;, &#39;, &#92; before parsing.
-
-Asset Identification: Use name as identifier.
-
-Absolute Paths: Use absolute paths (/styles.css, /detail.js) for assets in detail.html to avoid 404 errors on nested routes.
-
-Version Display: Don't add "v" prefix if version already contains it.
-
-Add CORS support for embedded contexts
-
-Implementation Steps
-Create Express server with OAuth authentication ,token caching and CORS support for embedded contexts
-Implement API proxy endpoints
-Build home page with responsive carousel
-Create detail page with Swagger UI integration
-Add comprehensive error handling
-Style with modern, professional design
-Configure for Heroku deployment
-Set environment variables
-Deploy and test
-Success Criteria
-Home page displays all APIs in an attractive carousel
-Carousel auto-rotates and has manual controls
-Detail pages load and display interactive Swagger UI
-OpenAPI specifications render correctly with decoded entities
-Application is fully responsive on all devices
-OAuth authentication works with token caching
-Error states are handled gracefully
-Application deploys successfully to Heroku
-
 
