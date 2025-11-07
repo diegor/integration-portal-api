@@ -24,7 +24,9 @@ Create a web application that serves as a Developer Portal for banking APIs. The
 - **API Endpoint**: `/services/data/v65.0/integration/mcp/portals/{PORTAL_ID}/assets`
 - **Portal ID**: Configurable (e.g., "HomeBanking")
 - **Response Format**: JSON with structure `{ count: number, items: [] }`
-  Sample response:
+
+  <details>
+  <summary>Sample response</summary>
 
   {
     "count": 4,
@@ -54,14 +56,16 @@ Create a web application that serves as a Developer Portal for banking APIs. The
             "version": "v1"
         }
     ]
+
 }
+</details>
   
 
 ### Asset Structure
 Each asset contains:
 - `name`: API name
 - `description`: Brief description
-- `version`: Version identifier (e.g., "v1")
+- `version`: Version identifier 
 - `documentation`: OpenAPI specification (HTML-encoded JSON string)
 
 ## Application Features
