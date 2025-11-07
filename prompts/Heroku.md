@@ -79,7 +79,7 @@ Each asset contains:
    - Icon/emoji representation (based on API name)
    - API name as title
    - Description (truncated to 3 lines)
-   - Version badge (without extra "v" prefix)
+   - Version badge 
    - "View Details" button
 
 ### Detail Page
