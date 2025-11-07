@@ -89,7 +89,8 @@ Each asset contains:
    - Large icon display
    - API name
    - Full description
-   - Version badge
+   - Version badge (remove v prefix if already part of asset version)
+   - Use the API endpoint to get an asset detail 
 
 2. **Interactive Documentation**
    - Full-page Swagger UI rendering
