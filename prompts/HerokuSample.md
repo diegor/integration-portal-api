@@ -33,7 +33,6 @@ Create a web application that serves as a Developer Portal for banking APIs. The
       "portalId": "1m7xx0000000001AAA",
       "source": "ApiCatalog",
       "sourceReference": "1LKxx0000004CAe",
-      "specification": null,
       "type": "RestApi",
       "version": "1.0"
     },
@@ -46,7 +45,6 @@ Create a web application that serves as a Developer Portal for banking APIs. The
       "portalId": "1m7xx0000000001AAA",
       "source": "ApiCatalog",
       "sourceReference": "1LKxx0000004CAg",
-      "specification": null,
       "type": "RestApi",
       "version": "1.0"
     },
@@ -59,7 +57,6 @@ Create a web application that serves as a Developer Portal for banking APIs. The
       "portalId": "1m7xx0000000001AAA",
       "source": "ApiCatalog",
       "sourceReference": "1LKxx0000004CCG",
-      "specification": null,
       "type": "RestApi",
       "version": "1.0"
     },
@@ -72,7 +69,6 @@ Create a web application that serves as a Developer Portal for banking APIs. The
       "portalId": "1m7xx0000000001AAA",
       "source": "ApiCatalog",
       "sourceReference": "1LKxx0000004CCH",
-      "specification": null,
       "type": "RestApi",
       "version": "1.0"
     }
@@ -96,7 +92,7 @@ Create a web application that serves as a Developer Portal for banking APIs. The
     "type": "RestApi",
     "version": "1.0"
 }
-
+```
   
 
 ### Asset Structure
@@ -105,7 +101,7 @@ Each asset contains:
 - `name`: API name
 - `description`: Brief description
 - `version`: Version identifier 
-- `specification`: specification (HTML-encoded JSON string) as OAS
+- `specification`: specification (HTML-encoded JSON string)
 
 ## Application Features
 
