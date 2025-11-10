@@ -105,7 +105,7 @@ Each asset contains:
 - `name`: API name
 - `description`: Brief description
 - `version`: Version identifier 
-- `specification`: OpenAPI specification (HTML-encoded JSON string)
+- `specification`: specification (HTML-encoded JSON string) as OAS
 
 ## Application Features
 
@@ -135,7 +135,7 @@ Each asset contains:
 
 2. **Interactive Documentation**
    - Full-page Swagger UI rendering
-   - Parse and decode HTML entities from documentation field 
+   - Parse and decode HTML entities from specification field 
    - Display complete OpenAPI specification
    - Interactive "Try it out" functionality
    - Request/response examples
